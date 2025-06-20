@@ -62,4 +62,7 @@ const setupDatabase = async () => {
         rating_id INT AUTO_INCREMENT PRIMARY KEY,
          request_id INT NOT NULL,
         walker_id INT NOT NULL,
-        
+        owner_id INT NOT NULL,
+        rating INT CHECK (rating BETWEEN 1 AND 5),
+         comments TEXT,
+        rated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
