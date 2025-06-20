@@ -35,7 +35,7 @@ const insertSampleData = async () => {
 
 insertSampleData();
 
-// Route: /api/dogs
+// Route 1: /api/dogs
 app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -49,7 +49,7 @@ app.get('/api/dogs', async (req, res) => {
   }
 });
 
-// Route: /api/walkrequests/open
+// Route 2: /api/walkrequests/open
 app.get('/api/walkrequests/open', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -65,7 +65,7 @@ app.get('/api/walkrequests/open', async (req, res) => {
   }
 });
 
-// Route: /api/walkers/summary
+// Route 3: /api/walkers/summary
 app.get('/api/walkers/summary', async (req, res) => {
   try {
     const [rows] = await pool.query(`
