@@ -115,5 +115,7 @@ const setupDatabase = async () => {
 setupDatabase();
 
 // /api/dogs endpoint
+app.get('/api/dogs', async (req, res) => {
+  try {
 
 
