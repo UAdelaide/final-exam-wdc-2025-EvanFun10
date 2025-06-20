@@ -128,5 +128,8 @@ app.get('/api/dogs', async (req, res) => {
   }
 });
 
+app.listen(port, () => {
+  console.log(`DogWalkService running at http://localhost:${port}`);
+});
 
 
