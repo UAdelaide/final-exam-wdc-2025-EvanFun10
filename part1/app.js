@@ -112,6 +112,8 @@ const setupDatabase = async () => {
   }
 };
 
+setupDatabase();
 
+// /api/dogs endpoint
 
 
