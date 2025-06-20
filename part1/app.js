@@ -91,7 +91,8 @@ const setupDatabase = async () => {
         ('Max', 'medium', (SELECT user_id FROM Users WHERE username = 'alice123')),
         ('Bella', 'small', (SELECT user_id FROM Users WHERE username = 'carol123')),
         ('Rocky', 'large', (SELECT user_id FROM Users WHERE username = 'daveowner')),
-         ('Melon', 'medium', (SELECT user_id FROM Users WHERE username = 'Melon123')),
+        ('Melon', 'medium', (SELECT user_id FROM Users WHERE username = 'Melon123')),
         ('Coco', 'small', (SELECT user_id FROM Users WHERE username = 'coco456'))
     `);
+    
 
