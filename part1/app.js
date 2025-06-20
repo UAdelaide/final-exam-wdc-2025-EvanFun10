@@ -117,5 +117,7 @@ setupDatabase();
 // /api/dogs endpoint
 app.get('/api/dogs', async (req, res) => {
   try {
+    const [rows] = await pool.query(`
+      SELECT d.name AS dog_name, d.size, u.username AS owner_username
 
 
