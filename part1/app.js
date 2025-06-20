@@ -46,4 +46,8 @@ const setupDatabase = async () => {
 
     await conn.query(`
       CREATE TABLE WalkApplications (
+        application_id INT AUTO_INCREMENT PRIMARY KEY,
+        request_id INT NOT NULL,
+        walker_id INT NOT NULL,
+        applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         
