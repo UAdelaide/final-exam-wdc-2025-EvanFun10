@@ -6,3 +6,5 @@ const port = 8080;
 const setupDatabase = async () => {
     const conn = await pool.getConnection();
   try {
+    await conn.query(`DROP DATABASE IF EXISTS DogWalkService`);
+    await conn.query(`CREATE DATABASE DogWalkService`);
