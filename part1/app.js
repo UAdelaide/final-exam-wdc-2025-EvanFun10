@@ -84,3 +84,6 @@ const setupDatabase = async () => {
          ('Melon123', 'melon@example.com', 'melonpass', 'owner'),
         ('coco456', 'coco@example.com', 'cocopass', 'owner')
     `);
+
+     // Insert dogs
+     
