@@ -108,5 +108,6 @@ const setupDatabase = async () => {
      } catch (err) {
     console.error('Database setup failed:', err);
   } finally {
+    
 
 
