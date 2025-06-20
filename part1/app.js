@@ -66,4 +66,6 @@ const setupDatabase = async () => {
         rating INT CHECK (rating BETWEEN 1 AND 5),
          comments TEXT,
         rated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+         FOREIGN KEY (request_id) REFERENCES WalkRequests(request_id),
+        FOREIGN KEY (walker_id) REFERENCES Users(user_id),
         
