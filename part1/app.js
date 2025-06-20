@@ -32,3 +32,5 @@ const setupDatabase = async () => {
     `);
 
     await conn.query(`
+         CREATE TABLE WalkRequests (
+        request_id INT AUTO_INCREMENT PRIMARY KEY,
