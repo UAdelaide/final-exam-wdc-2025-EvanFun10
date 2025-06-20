@@ -103,6 +103,7 @@ const setupDatabase = async () => {
         ((SELECT dog_id FROM Dogs WHERE name = 'Bella'), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),
         ((SELECT dog_id FROM Dogs WHERE name = 'Rocky'), '2025-06-11 10:00:00', 60, 'City Park', 'open'),
         ((SELECT dog_id FROM Dogs WHERE name = 'Melon'), '2025-06-11 15:00:00', 30, 'Greenwood Lake', 'open'),
-        
+         ((SELECT dog_id FROM Dogs WHERE name = 'Coco'), '2025-06-12 11:00:00', 40, 'Riverwalk Trail', 'cancelled')
+    `);
 
 
