@@ -43,3 +43,7 @@ const setupDatabase = async () => {
            FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id)
       )
     `);
+
+    await conn.query(`
+      CREATE TABLE WalkApplications (
+        
