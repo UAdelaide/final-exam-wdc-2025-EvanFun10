@@ -33,8 +33,8 @@ const setupDatabase = async () => {
 
     await conn.query(`
          CREATE TABLE WalkRequests (
-        request_id INT AUTO_INCREMENT PRIMARY KEY,
-         dog_id INT NOT NULL,
+           request_id INT AUTO_INCREMENT PRIMARY KEY,
+           dog_id INT NOT NULL,
         requested_time DATETIME NOT NULL,
         duration_minutes INT NOT NULL,
         location VARCHAR(255) NOT NULL,
