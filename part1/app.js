@@ -94,5 +94,6 @@ const setupDatabase = async () => {
         ('Melon', 'medium', (SELECT user_id FROM Users WHERE username = 'Melon123')),
         ('Coco', 'small', (SELECT user_id FROM Users WHERE username = 'coco456'))
     `);
-    
+
+    // Insert walk requests
 
