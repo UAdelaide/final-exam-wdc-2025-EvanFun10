@@ -39,3 +39,5 @@ const setupDatabase = async () => {
         duration_minutes INT NOT NULL,
         location VARCHAR(255) NOT NULL,
          status ENUM('open', 'accepted', 'completed', 'cancelled') DEFAULT 'open',
+         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+         
