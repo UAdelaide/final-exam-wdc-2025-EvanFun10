@@ -30,3 +30,5 @@ const setupDatabase = async () => {
          FOREIGN KEY (owner_id) REFERENCES Users(user_id)
       )
     `);
+
+    await conn.query(`
