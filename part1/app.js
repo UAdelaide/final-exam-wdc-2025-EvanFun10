@@ -4,7 +4,7 @@ const app = express();
 const port = 8080;
 
 const setupDatabase = async () => {
-    const conn = await pool.getConnection();
+  const conn = await pool.getConnection();
   try {
     await conn.query(`DROP DATABASE IF EXISTS DogWalkService`);
     await conn.query(`CREATE DATABASE DogWalkService`);
@@ -12,12 +12,12 @@ const setupDatabase = async () => {
 
     await conn.query(`
       CREATE TABLE Users (
-         user_id INT AUTO_INCREMENT PRIMARY KEY,
-         username VARCHAR(50) UNIQUE NOT NULL,
-         email VARCHAR(100) UNIQUE NOT NULL,
-         password_hash VARCHAR(255) NOT NULL,
-         role ENUM('owner', 'walker') NOT NULL,
-         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        user_id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        role ENUM('owner', 'walker') NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
 
@@ -32,15 +32,15 @@ const setupDatabase = async () => {
     `);
 
     await conn.query(`
-         CREATE TABLE WalkRequests (
-           request_id INT AUTO_INCREMENT PRIMARY KEY,
-           dog_id INT NOT NULL,
-           requested_time DATETIME NOT NULL,
-           duration_minutes INT NOT NULL,
-           location VARCHAR(255) NOT NULL,
-           status ENUM('open', 'accepted', 'completed', 'cancelled') DEFAULT 'open',
-           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-           FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id)
+      CREATE TABLE WalkRequests (
+        request_id INT AUTO_INCREMENT PRIMARY KEY,
+        dog_id INT NOT NULL,
+        requested_time DATETIME NOT NULL,
+        duration_minutes INT NOT NULL,
+        location VARCHAR(255) NOT NULL,
+        status ENUM('open', 'accepted', 'completed', 'cancelled') DEFAULT 'open',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (dog_id) REFERENCES Dogs(dog_id)
       )
     `);
 
@@ -73,15 +73,15 @@ const setupDatabase = async () => {
       )
     `);
 
-     // Insert users
+    // Insert users (including melon123 and coco456)
     await conn.query(`
       INSERT INTO Users (username, email, password_hash, role) VALUES
         ('alice123', 'alice@example.com', 'hashed123', 'owner'),
-         ('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
+        ('bobwalker', 'bob@example.com', 'hashed456', 'walker'),
         ('carol123', 'carol@example.com', 'hashed789', 'owner'),
         ('daveowner', 'dave@example.com', 'daveowns', 'owner'),
         ('elliewalks', 'ellie@example.com', 'elliepass456', 'walker'),
-         ('Melon123', 'melon@example.com', 'melonpass', 'owner'),
+        ('Melon123', 'melon@example.com', 'melonpass', 'owner'),
         ('coco456', 'coco@example.com', 'cocopass', 'owner')
     `);
 
@@ -89,4 +89,3 @@ const setupDatabase = async () => {
      await conn.query(`
       INSERT INTO Dogs (name, size, owner_id) VALUES
         ('Max', 'medium', (SELECT user_id FROM Users WHERE username = 'alice123')),
-        
