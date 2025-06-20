@@ -1,15 +1,13 @@
-// app.js
 const express = require('express');
 const pool = require('./db');
 const app = express();
 const port = 3000;
 
-// Insert sample data on startup
+// Insert sample data at startup
 const insertSampleData = async () => {
   try {
     const conn = await pool.getConnection();
 
-    // Insert users (must be owners/walkers)
     await conn.query(`
       INSERT IGNORE INTO Users (username, email, password_hash, role) VALUES
         ('alice123', 'alice@example.com', 'hashed123', 'owner'),
@@ -17,14 +15,12 @@ const insertSampleData = async () => {
         ('carol123', 'carol@example.com', 'hashed789', 'owner')
     `);
 
-    // Insert dogs owned by users
     await conn.query(`
       INSERT IGNORE INTO Dogs (name, size, owner_id) VALUES
         ('Max', 'medium', (SELECT user_id FROM Users WHERE username = 'alice123')),
         ('Bella', 'small', (SELECT user_id FROM Users WHERE username = 'carol123'))
     `);
 
-    // Insert walk requests for dogs
     await conn.query(`
       INSERT IGNORE INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status) VALUES
         ((SELECT dog_id FROM Dogs WHERE name = 'Max'), '2025-06-10 08:00:00', 30, 'Parklands', 'open'),
@@ -39,7 +35,7 @@ const insertSampleData = async () => {
 
 insertSampleData();
 
-// GET /api/dogs — dog name, size, owner username
+// Route: /api/dogs
 app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -48,12 +44,12 @@ app.get('/api/dogs', async (req, res) => {
       JOIN Users u ON d.owner_id = u.user_id
     `);
     res.json(rows);
-  } catch {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve dogs' });
   }
 });
 
-// GET /api/walkrequests/open — open walk requests with dog and owner
+// Route: /api/walkrequests/open
 app.get('/api/walkrequests/open', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -64,12 +60,12 @@ app.get('/api/walkrequests/open', async (req, res) => {
       WHERE wr.status = 'open'
     `);
     res.json(rows);
-  } catch {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve open walk requests' });
   }
 });
 
-// GET /api/walkers/summary — ratings and completed walks
+// Route: /api/walkers/summary
 app.get('/api/walkers/summary', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -84,9 +80,11 @@ app.get('/api/walkers/summary', async (req, res) => {
       GROUP BY u.user_id
     `);
     res.json(rows);
-  } catch {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve walker summaries' });
   }
 });
 
-app.listen(port, () => console.log(`API running at http://localhost:${port}`));
+app.listen(port, () => {
+  console.log(`API running at http://localhost:${port}`);
+});
