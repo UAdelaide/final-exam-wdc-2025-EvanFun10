@@ -8,3 +8,7 @@ const setupDatabase = async () => {
   try {
     await conn.query(`DROP DATABASE IF EXISTS DogWalkService`);
     await conn.query(`CREATE DATABASE DogWalkService`);
+    await conn.query(`USE DogWalkService`);
+
+    await conn.query(`
+      CREATE TABLE Users (
