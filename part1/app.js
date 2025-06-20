@@ -24,3 +24,6 @@ const setupDatabase = async () => {
     await conn.query(`
       CREATE TABLE Dogs (
         dog_id INT AUTO_INCREMENT PRIMARY KEY,
+        owner_id INT NOT NULL,
+        name VARCHAR(50) NOT NULL,
+        
