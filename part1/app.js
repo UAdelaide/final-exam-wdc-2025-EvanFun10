@@ -53,7 +53,7 @@ const setupDatabase = async () => {
         status ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending',
         FOREIGN KEY (request_id) REFERENCES WalkRequests(request_id),
         FOREIGN KEY (walker_id) REFERENCES Users(user_id),
-         CONSTRAINT unique_application UNIQUE (request_id, walker_id)
+        CONSTRAINT unique_application UNIQUE (request_id, walker_id)
       )
     `);
 
@@ -68,4 +68,7 @@ const setupDatabase = async () => {
         rated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
          FOREIGN KEY (request_id) REFERENCES WalkRequests(request_id),
         FOREIGN KEY (walker_id) REFERENCES Users(user_id),
-        
+        FOREIGN KEY (owner_id) REFERENCES Users(user_id),
+        CONSTRAINT unique_rating_per_walk UNIQUE (request_id)
+      )
+    `);
