@@ -81,4 +81,6 @@ const setupDatabase = async () => {
         ('carol123', 'carol@example.com', 'hashed789', 'owner'),
         ('daveowner', 'dave@example.com', 'daveowns', 'owner'),
         ('elliewalks', 'ellie@example.com', 'elliepass456', 'walker'),
-        
+         ('Melon123', 'melon@example.com', 'melonpass', 'owner'),
+        ('coco456', 'coco@example.com', 'cocopass', 'owner')
+    `);
