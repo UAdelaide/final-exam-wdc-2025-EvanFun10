@@ -73,7 +73,7 @@ const setupDatabase = async () => {
       )
     `);
 
-    // Insert users (including melon123 and coco456)
+    // Insert users 
     await conn.query(`
       INSERT INTO Users (username, email, password_hash, role) VALUES
         ('alice123', 'alice@example.com', 'hashed123', 'owner'),
@@ -85,8 +85,8 @@ const setupDatabase = async () => {
         ('coco456', 'coco@example.com', 'cocopass', 'owner')
     `);
 
-     // Insert dogs
-     await conn.query(`
+    // Insert dogs
+    await conn.query(`
       INSERT INTO Dogs (name, size, owner_id) VALUES
         ('Max', 'medium', (SELECT user_id FROM Users WHERE username = 'alice123')),
         ('Bella', 'small', (SELECT user_id FROM Users WHERE username = 'carol123')),
@@ -103,12 +103,12 @@ const setupDatabase = async () => {
         ((SELECT dog_id FROM Dogs WHERE name = 'Bella'), '2025-06-10 09:30:00', 45, 'Beachside Ave', 'accepted'),
         ((SELECT dog_id FROM Dogs WHERE name = 'Rocky'), '2025-06-11 10:00:00', 60, 'City Park', 'open'),
         ((SELECT dog_id FROM Dogs WHERE name = 'Melon'), '2025-06-11 15:00:00', 30, 'Greenwood Lake', 'open'),
-         ((SELECT dog_id FROM Dogs WHERE name = 'Coco'), '2025-06-12 11:00:00', 40, 'Riverwalk Trail', 'cancelled')
+        ((SELECT dog_id FROM Dogs WHERE name = 'Coco'), '2025-06-12 11:00:00', 40, 'Riverwalk Trail', 'cancelled')
     `);
-     } catch (err) {
+  } catch (err) {
     console.error('Database setup failed:', err);
   } finally {
-     conn.release();
+    conn.release();
   }
 };
 
@@ -119,9 +119,9 @@ app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await pool.query(`
       SELECT d.name AS dog_name, d.size, u.username AS owner_username
-       FROM Dogs d
+      FROM Dogs d
       JOIN Users u ON d.owner_id = u.user_id
-      `);
+    `);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve dogs' });
@@ -131,5 +131,3 @@ app.get('/api/dogs', async (req, res) => {
 app.listen(port, () => {
   console.log(`DogWalkService running at http://localhost:${port}`);
 });
-
-
