@@ -66,3 +66,4 @@ const setupDatabase = async () => {
         rating INT CHECK (rating BETWEEN 1 AND 5),
          comments TEXT,
         rated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        
