@@ -20,3 +20,7 @@ const setupDatabase = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+
+    await conn.query(`
+      CREATE TABLE Dogs (
+        dog_id INT AUTO_INCREMENT PRIMARY KEY,
