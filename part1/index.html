@@ -43,20 +43,20 @@
     <p><strong>Bio:</strong> Click the BIG BUTTON to see another dog and experience the magic!</p>
     <button @click="fetchDog">DOG PLEASE</button>
 
-     <div v-if="showExamples">
+    <div v-if="showExamples">
       <h2>Example Dogs</h2>
-       <img src="https://images.dog.ceo/breeds/akita/Akita_inu_blanc.jpg" class="dog-pic" alt="Example dog 1 - Akita" />
+      <img src="https://images.dog.ceo/breeds/akita/Akita_inu_blanc.jpg" class="dog-pic" alt="Example dog 1 - Akita" />
       <img src="https://images.dog.ceo/breeds/leonberg/n02111129_2400.jpg" class="dog-pic" alt="Example dog 2 - Leonberger" />
     </div>
-    </div>
+  </div>
 
-    <script>
+  <script>
     const { createApp } = Vue;
 
     createApp({
       data() {
         return {
-             dogImage: '',
+          dogImage: '',
           showExamples: true // You can toggle this
         };
       },
@@ -67,8 +67,15 @@
             const data = await res.json();
             this.dogImage = data.message;
           } catch (err) {
-             console.error('DOG FAIL', err);
+            console.error('DOG FAIL', err);
           }
         }
       },
-      
+      mounted() {
+        this.fetchDog();
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
+
