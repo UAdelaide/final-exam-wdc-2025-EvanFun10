@@ -62,11 +62,6 @@
       </div>
     </div>
     <p v-else>No walk requests yet.</p>
-
-    <!-- Log out button -->
-    <div class="text-center mt-5">
-      <button id="logoutBtn" class="btn btn-outline-danger">Log Out</button>
-    </div>
   </div>
 
   <script>
@@ -133,16 +128,6 @@
         };
       }
     }).mount('#app');
-
-    // Log out button logic
-    const logoutBtn = document.getElementById('logoutBtn');
-    const username = localStorage.getItem('username') || 'User';
-    logoutBtn.textContent = `Log Out (${username})`;
-
-    logoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('username');
-      window.location.href = 'login.html'; 
-    });
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
