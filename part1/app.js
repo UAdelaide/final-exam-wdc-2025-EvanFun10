@@ -73,7 +73,7 @@ const setupDatabase = async () => {
       )
     `);
 
-    // Insert users 
+    // Insert users
     await conn.query(`
       INSERT INTO Users (username, email, password_hash, role) VALUES
         ('alice123', 'alice@example.com', 'hashed123', 'owner'),
@@ -114,7 +114,12 @@ const setupDatabase = async () => {
 
 setupDatabase();
 
-// /api/dogs endpoint
+// Home route
+app.get('/', (req, res) => {
+  res.send('DogWalkService API is running. Try /api/dogs, /api/walkrequests/open, or /api/walkers/summary');
+});
+
+// Route 1: /api/dogs
 app.get('/api/dogs', async (req, res) => {
   try {
     const [rows] = await pool.query(`
@@ -125,6 +130,42 @@ app.get('/api/dogs', async (req, res) => {
     res.json(rows);
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve dogs' });
+  }
+});
+
+// Route 2: /api/walkrequests/open
+app.get('/api/walkrequests/open', async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT wr.request_id, d.name AS dog_name, wr.requested_time, wr.duration_minutes, wr.location, u.username AS owner_username
+      FROM WalkRequests wr
+      JOIN Dogs d ON wr.dog_id = d.dog_id
+      JOIN Users u ON d.owner_id = u.user_id
+      WHERE wr.status = 'open'
+    `);
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve open walk requests' });
+  }
+});
+
+// Route 3: /api/walkers/summary
+app.get('/api/walkers/summary', async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT u.username AS walker_username,
+             COUNT(r.rating_id) AS total_ratings,
+             ROUND(AVG(r.rating), 1) AS average_rating,
+             COUNT(CASE WHEN wr.status = 'completed' THEN 1 END) AS completed_walks
+      FROM Users u
+      LEFT JOIN WalkRatings r ON u.user_id = r.walker_id
+      LEFT JOIN WalkRequests wr ON wr.request_id = r.request_id
+      WHERE u.role = 'walker'
+      GROUP BY u.user_id
+    `);
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to retrieve walker summaries' });
   }
 });
 
