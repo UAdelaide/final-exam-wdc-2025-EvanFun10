@@ -11,18 +11,21 @@
       color: limegreen;
       font-family: 'Comic Sans MS', cursive;
       text-align: center;
-      animation: flash 1s infinite;
+      animation: flash 2s infinite;
     }
+
     @keyframes flash {
-      0% { background-color: yellow; }
-      50% { background-color: orange; }
-      100% { background-color: yellow; }
+      0% { background-color: green; }
+      50% { background-color: yellow; }
+      100% { background-color: orange; }
     }
+
     .dog-pic {
       width: 500px;
       height: auto;
       border: 10px dashed red;
     }
+
     button {
       font-size: 2rem;
       padding: 20px;
@@ -57,7 +60,7 @@
       data() {
         return {
           dogImage: '',
-          showExamples: true 
+          showExamples: true
         };
       },
       methods: {
@@ -78,4 +81,3 @@
   </script>
 </body>
 </html>
-
