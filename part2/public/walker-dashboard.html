@@ -27,12 +27,19 @@
               <strong>Location:</strong> {{ walk.location }}<br>
               <strong>Owner:</strong> {{ walk.owner_name }}
             </p>
-            <button type=button class="btn btn-outline-success" @click="applyToWalk(walk.request_id)">Apply</button>
+            <button type="button" class="btn btn-outline-success" @click="applyToWalk(walk.request_id)">Apply</button>
           </div>
         </div>
       </div>
     </div>
     <p v-else>No available walk requests at the moment.</p>
+
+    <!-- Logout button -->
+    <div class="text-center mt-5">
+      <button onclick="window.location.href='index.html'" class="btn btn-outline-danger">
+        Log Out
+      </button>
+    </div>
   </div>
 
   <script>
@@ -43,7 +50,7 @@
         const walks = ref([]);
         const message = ref('');
         const error = ref('');
-        const user = 3;
+        const user = 3; // example walker_id
 
         async function loadWalkRequests() {
           try {
