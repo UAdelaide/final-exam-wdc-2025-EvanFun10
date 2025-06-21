@@ -54,13 +54,20 @@
   </div>
 
   <script>
-    function loginAsOwner() {
-      window.location.href = 'owner-dashboard.html';
-    }
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
 
-    function loginAsWalker() {
-      window.location.href = 'walker-dashboard.html';
-    }
+      const username = document.getElementById('username').value.trim().toLowerCase();
+
+      // Simulated login role check based on username
+      if (username.startsWith('owner')) {
+        window.location.href = 'owner-dashboard.html';
+      } else if (username.startsWith('walker')) {
+        window.location.href = 'walker-dashboard.html';
+      } else {
+        alert('Invalid username. Please use a username starting with "owner" or "walker".');
+      }
+    });
   </script>
 
 </body>
