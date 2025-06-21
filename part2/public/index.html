@@ -54,13 +54,13 @@
   </div>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      // Simulate login check here if needed
-      // You can also fetch to a backend route and check credentials
-      window.location.href = 'owner-dashboard.html'; // change to walker-dashboard.html if needed
-      
-    });
+    function loginAsOwner() {
+      window.location.href = 'owner-dashboard.html';
+    }
+
+    function loginAsWalker() {
+      window.location.href = 'walker-dashboard.html';
+    }
   </script>
 
 </body>
