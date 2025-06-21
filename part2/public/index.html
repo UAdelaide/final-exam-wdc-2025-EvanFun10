@@ -62,10 +62,13 @@
 
       // Hardcoded credentials
       const credentials = {
-        alice123: { password: 'hashed123', role: 'owner' },
-        bobwalker: { password: 'hashed456', role: 'walker' }
-      
-      };
+  alice123:     { password: 'hashed123', role: 'owner' },
+  bobwalker:    { password: 'hashed456', role: 'walker' },
+  carol123:     { password: 'hashed789', role: 'owner' },
+  daveowner:    { password: 'daveowns',  role: 'owner' },
+  ethanwalks:   { password: 'ethanpass456', role: 'walker' }
+};
+
 
       if (credentials[username] && credentials[username].password === password) {
         const role = credentials[username].role;
