@@ -57,15 +57,24 @@
     document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const username = document.getElementById('username').value.trim().toLowerCase();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-      // Simulated login role check based on username
-      if (username.startsWith('owner')) {
-        window.location.href = 'owner-dashboard.html';
-      } else if (username.startsWith('walker')) {
-        window.location.href = 'walker-dashboard.html';
+      // Hardcoded credentials
+      const credentials = {
+        alice123: { password: 'hashed123', role: 'owner' },
+        bobwalker: { password: 'hashed456', role: 'walker' }
+      };
+
+      if (credentials[username] && credentials[username].password === password) {
+        const role = credentials[username].role;
+        if (role === 'owner') {
+          window.location.href = 'owner-dashboard.html';
+        } else if (role === 'walker') {
+          window.location.href = 'walker-dashboard.html';
+        }
       } else {
-        alert('Invalid username. Please use a username starting with "owner" or "walker".');
+        alert('Invalid username or password. Please try again.');
       }
     });
   </script>
